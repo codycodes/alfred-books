@@ -24,7 +24,7 @@ class Book:
                 }
 
     def display_count(self):
-        return 'Total books: ' + Book.books
+        return 'Total books: ' + str(Book.books)
 
 def get_book_db():
     book_dir = os.path.expanduser('~' + BOOKS_PATH)
@@ -52,7 +52,7 @@ def get_books():
 #     print(str(count) + ": " + str(b[count]))
 #     count += 1
 
-# books = get_books()
+books = get_books()
+print(books[-1].display_count())
 # for b in books:
 #     print(b.title)
-
