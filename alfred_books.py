@@ -8,11 +8,10 @@ log = None
 
 def main(wf):
 
-    log.debug('Started')
-    # check if there's a query
+    # log.debug('Started')
     args = len(wf.args)
-    log.debug('ARGS: ' + str(wf.args))
-    if args:
+    # log.debug('ARGS: ' + str(wf.args))
+    if args and wf.args[0]:
         switch = wf.args[0]
         if '-a' or '-t' or '-n' in switch:
             switch = switch[:2]
