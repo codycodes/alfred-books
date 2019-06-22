@@ -52,7 +52,7 @@ def get_books():
 #     print(str(count) + ": " + str(b[count]))
 #     count += 1
 
-books = get_books()
-print(books[-1].display_count())
+# books = get_books()
+# print(books[-1].display_count())
 # for b in books:
 #     print(b.title)
