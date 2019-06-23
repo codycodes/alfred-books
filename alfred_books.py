@@ -1,5 +1,6 @@
 import sys
 import book
+# import testbook as book
 from workflow import Workflow, ICON_WEB, web, Variables
 import logging
 
@@ -16,7 +17,7 @@ def main(wf):
     option = None
     if args and wf.args[0]:
         switch = wf.args[0]
-        if '-a' or '-t' or '-h' in switch:
+        if '-a' or '-t' or '-g' or '-h' in switch:
             switch = switch[:2]
             query, option = wf.args[0].split(switch)[1], switch
         else:   
@@ -36,21 +37,27 @@ def main(wf):
                 books = wf.filter(query, books, key=lambda book: u' '.join(book.author), min_score=30)
             elif option == '-t':
                 books = wf.filter(query, books, key=lambda book: u' '.join(book.title), min_score=30)
+            elif option == '-g':
+                books = wf.filter(query, books, key=lambda book: u' '.join(book.genre), min_score=30)
             elif option == '-h':
                 wf.add_item(
                     title='alfred-books options:',
-                    subtitle='-t search via title, -a search via author, -h show switches',
-                    largetext="-t   search via title,\n-a  search via author,\n-h  show switches (this one)"
+                    subtitle='-t search via title, -a search via author, -g search via genre, -h show switches',
+                    largetext="-t   search via title,\n-a  search via author,\n-g  search via genre,\n-h  show switches (this one)"
                 )
 
     for b in books:
+        if b.genre == '':
+            b.genre = 'No genre for this title available in Books'
         wf.add_item(type='file',
                     title=b.title, 
                     valid=True,
                     subtitle=b.author,
                     arg=b.path,
                     quicklookurl=b.path,
-                    largetext=b.book_desc,
+                    
+                    # largetext=str(b.percent_complete),
+                    largetext=u'Genre: ' + b.genre + u'\nCompleted: ' + b.percent_complete + u'\nDescription:\n' + b.book_desc,
                     )
     wf.send_feedback()
 
