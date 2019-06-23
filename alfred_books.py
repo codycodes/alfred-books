@@ -1,44 +1,49 @@
 import sys
 import book
-from workflow import Workflow, ICON_WEB, web
+from workflow import Workflow, ICON_WEB, web, Variables
 import logging
 
 __version__ = '0.1'
 log = None
 
+
 def main(wf):
 
-    # log.debug('Started')
+    log.debug('Started')
     args = len(wf.args)
-    # log.debug('ARGS: ' + str(wf.args))
+    log.debug('ARGS: ' + str(wf.args))
+
+    option = None
     if args and wf.args[0]:
         switch = wf.args[0]
-        if '-a' or '-t' or '-n' in switch:
+        if '-a' or '-t' or '-h' in switch:
             switch = switch[:2]
-            # log.debug('!!found options!!' +  wf.args[0].split(switch)[1])
             query, option = wf.args[0].split(switch)[1], switch
         else:   
             query, option = wf.args[0], None
     else:
         query = None
-
-    books = book.get_books()
+    # max age of 20 seconds to reduce querying database
+    # and make it blazingly fast
+    books = wf.cached_data('books', book.get_books, max_age=20)
+    # books = book.get_books()
 
     # log.debug('OPTION: ' + str(option))
     # TODO: play around with the text matching.
-    if query:
+    # show help with no space required
+    if query or option == '-h':
         if option:
             if option == '-a':
+                wf.setvar('show_desc', "False")
                 books = wf.filter(query, books, key=lambda book: u' '.join(book.author), min_score=30)
             elif option == '-t':
                 books = wf.filter(query, books, key=lambda book: u' '.join(book.title), min_score=30)
-            elif option == '-n':
-                # TODO: add is_new filter
-                pass
-            else:
-                books = wf.filter(query, books, key=lambda book: u' '.join(book.title + u' ' + book.author), min_score=30)
-        else:
-            books = wf.filter(query, books, key=lambda book: u' '.join(book.title + u' ' + book.author), min_score=30)
+            elif option == '-h':
+                wf.add_item(
+                    title='alfred-books options:',
+                    subtitle='-t search via title, -a search via author, -h show switches',
+                    largetext="-t   search via title,\n-a  search via author,\n-h  show switches (this one)"
+                )
 
     for b in books:
         wf.add_item(type='file',
@@ -46,7 +51,6 @@ def main(wf):
                     valid=True,
                     subtitle=b.author,
                     arg=b.path,
-                    modifier_subtitles={'cmd' : b.path},
                     quicklookurl=b.path,
                     )
     wf.send_feedback()
@@ -54,6 +58,6 @@ def main(wf):
 
 
 if __name__ == u"__main__":
-    wf = Workflow()
+    wf = Workflow(help_url='https://github.com/codycodes/alfred-books')
     log = wf.logger
     sys.exit(wf.run(main))
