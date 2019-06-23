@@ -50,6 +50,7 @@ def main(wf):
                     subtitle=b.author,
                     arg=b.path,
                     quicklookurl=b.path,
+                    largetext=b.book_desc,
                     )
     wf.send_feedback()
 
