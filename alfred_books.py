@@ -55,9 +55,7 @@ def main(wf):
                     subtitle=b.author,
                     arg=b.path,
                     quicklookurl=b.path,
-                    
-                    # largetext=str(b.percent_complete),
-                    largetext=u'Genre: ' + b.genre + u'\nCompleted: ' + b.percent_complete + u'\nDescription:\n' + b.book_desc,
+                    largetext=b.title + u', by ' + b.author + u'\nGenre: ' + b.genre + u'\nCompleted: ' + b.percent_complete + u'\nDescription:\n' + b.book_desc,
                     )
     wf.send_feedback()
 
