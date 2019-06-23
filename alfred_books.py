@@ -26,7 +26,6 @@ def main(wf):
     # max age of 20 seconds to reduce querying database
     # and make it blazingly fast
     books = wf.cached_data('books', book.get_books, max_age=20)
-    # books = book.get_books()
 
     # log.debug('OPTION: ' + str(option))
     # TODO: play around with the text matching.
@@ -34,7 +33,6 @@ def main(wf):
     if query or option == '-h':
         if option:
             if option == '-a':
-                wf.setvar('show_desc', "False")
                 books = wf.filter(query, books, key=lambda book: u' '.join(book.author), min_score=30)
             elif option == '-t':
                 books = wf.filter(query, books, key=lambda book: u' '.join(book.title), min_score=30)
