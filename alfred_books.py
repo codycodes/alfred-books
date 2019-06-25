@@ -17,19 +17,21 @@ def main(wf):
     option = None
     if args and wf.args[0]:
         switch = wf.args[0]
-        if '-a' or '-t' or '-g' or '-h' in switch:
+        if ('-a' or '-t' or '-g' or '-h') in switch:
             switch = switch[:2]
             query, option = wf.args[0].split(switch)[1], switch
-        else:   
+        else:
             query, option = wf.args[0], None
     else:
         query = None
     # max age of 20 seconds to reduce querying database
     # and make it blazingly fast
-    books = wf.cached_data('books', book.get_books, max_age=20)
+    # books = wf.cached_data('books', book.get_books, max_age=20)
+    books = wf.cached_data('books', book.get_books)
 
     # log.debug('OPTION: ' + str(option))
     # TODO: play around with the text matching.
+
     # show help with no space required
     if query or option == '-h':
         if option:
@@ -43,8 +45,10 @@ def main(wf):
                 wf.add_item(
                     title='alfred-books options:',
                     subtitle='-t search via title, -a search via author, -g search via genre, -h show switches',
-                    largetext="-t   search via title,\n-a  search via author,\n-g  search via genre,\n-h  show switches (this one)"
+                    largetext="-t   search via title,\n-a  search via author,\n-g  search via genre,\n-h  show switches (this one),\n no option(s)  search by title and author"
                 )
+        else:
+            books = wf.filter(query, books, key=lambda book: u' '.join(book.title) + u' ' + u' '.join(book.author), min_score=30)
 
     for b in books:
         if b.genre == '':
