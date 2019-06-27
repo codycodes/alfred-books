@@ -1,7 +1,7 @@
 import sys
 import book
 # import testbook as book
-from workflow import Workflow, ICON_WEB, web, Variables
+from workflow import Workflow, ICON_WARNING
 import logging
 
 __version__ = '0.1'
@@ -32,7 +32,12 @@ def main(wf):
     # books = wf.cached_data('books', book.get_books, max_age=20)
     # books = wf.cached_data('books', book.get_books) # Testing only...
     books = book.get_books()
-    
+
+    # Don't do everything else if there are no books
+    if not books:
+        wf.add_item('No books found. Check the Books app first.', icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
 
     log.debug('QUERY: ' + str(query) + ', OPTION: ' + str(option))
     # TODO: play around with the text matching.
