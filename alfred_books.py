@@ -71,6 +71,8 @@ def main(wf):
                     valid=True,
                     subtitle=b.author,
                     arg=b.path,
+                    icon=b.path,
+                    icontype='fileicon',
                     quicklookurl=b.path,
                     largetext=b.title + u', by ' + b.author + u'\nGenre: ' + b.genre + u'\nCompleted: ' + b.percent_complete + u'\nDescription:\n' + b.book_desc,
                     )

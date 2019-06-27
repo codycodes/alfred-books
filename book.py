@@ -14,7 +14,7 @@ class Book:
         self.book_desc = book_desc if book_desc else "No book description for this title available in Books"
         self.is_new = is_new
         self.genre = genre if genre else ''
-        self.percent_complete = '0%' if not percent_complete else str(percent_complete * 100)[:4] + '%' # str(percent_complete * 100) + "%"
+        self.percent_complete = '0%' if not percent_complete else str(percent_complete * 100)[:4] + '%'
         Book.books += 1
 
     def display_book(self):
