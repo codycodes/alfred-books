@@ -1,8 +1,8 @@
 import sys
 import book
-# import testbook as book
-from workflow import Workflow, ICON_WARNING
+from workflow import Workflow, ICON_WARNING, MATCH_ALL, MATCH_ALLCHARS
 import logging
+# import testbook as book
 
 __version__ = '0.1'
 log = None
@@ -29,11 +29,10 @@ def main(wf):
         query = None
     # max age of 20 seconds to reduce querying database
     # and make it blazingly fast
-    # books = wf.cached_data('books', book.get_books, max_age=20)
-    # books = wf.cached_data('books', book.get_books) # Testing only...
-    books = book.get_books()
+    books = wf.cached_data('books', book.get_books, max_age=20)
+    # books = book.get_books()
 
-    # Don't do everything else if there are no books
+    # Don't do anything else if there are no books
     if not books:
         wf.add_item('No books found. Check the Books app first.', icon=ICON_WARNING)
         wf.send_feedback()
@@ -47,13 +46,13 @@ def main(wf):
         if option:
             if option == '-a':
                 log.debug('-a input')
-                books = wf.filter(query, books, key=lambda book: u' '.join(book.author), min_score=30)
+                books = wf.filter(query, books, key=lambda book: u' '.join(book.author), match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30)
             elif option == '-t':
                 log.debug('-t input')
-                books = wf.filter(query, books, key=lambda book: u' '.join(book.title), min_score=30)
+                books = wf.filter(query, books, key=lambda book: u' '.join(book.title), match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30)
             elif option == '-g':
                 log.debug('-g input')
-                books = wf.filter(query, books, key=lambda book: u' '.join(book.genre), min_score=30)
+                books = wf.filter(query, books, key=lambda book: u' '.join(book.genre), match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30)
             elif option == '-h':
                 wf.add_item(
                     title='alfred-books options:',
@@ -61,7 +60,7 @@ def main(wf):
                     largetext="-t   search via title,\n-a  search via author,\n-g  search via genre,\n-h  show switches (this one),\n no option(s)  search by title and author"
                 )
         else:
-            books = wf.filter(query, books, key=lambda book: u' '.join(book.title) + u' ' + u' '.join(book.author), min_score=30)
+            books = wf.filter(query, books, key=lambda book: u' '.join(book.title) + u' ' + u' '.join(book.author), match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30)
 
     for b in books:
         if b.genre == '':
