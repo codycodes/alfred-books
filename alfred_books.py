@@ -1,6 +1,6 @@
 import sys
 import book
-from workflow import Workflow, ICON_WARNING, MATCH_ALL, MATCH_ALLCHARS
+from workflow import Workflow, ICON_WARNING, ICON_INFO, MATCH_ALL, MATCH_ALLCHARS
 import logging
 # import testbook as book
 
@@ -10,6 +10,15 @@ log = None
 def main(wf):
 
     log.debug('Started')
+
+    if wf.update_available:
+        # Adds a notification to top of Script Filter results
+        wf.add_item('New version available',
+                'Action this item to install the update',
+                valid=False,
+                autocomplete='workflow:update',
+                icon=ICON_INFO)
+
     args = len(wf.args)
     log.debug('ARGS: ' + str(wf.args))
 
@@ -79,6 +88,8 @@ def main(wf):
 
 
 if __name__ == u"__main__":
-    wf = Workflow(help_url='https://github.com/codycodes/alfred-books')
+    wf = Workflow(help_url='https://github.com/codycodes/alfred-books', update_settings={
+                'github_slug': 'codycodes/alfred-books'
+    })
     log = wf.logger
     sys.exit(wf.run(main))
