@@ -88,7 +88,7 @@ def main(wf):
 
 
 if __name__ == u"__main__":
-    wf = Workflow(help_url='https://github.com/codycodes/alfred-books', update_settings={
+    wf = Workflow(help_url='https://github.com/codycodes/alfred-books/issues', update_settings={
                 'github_slug': 'codycodes/alfred-books'
     })
     log = wf.logger

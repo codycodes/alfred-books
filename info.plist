@@ -98,7 +98,35 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Use Alfred as an interface to access Apple's Books application
+	
+	You can search for title and author using the keyword search (default is "ib").
+	You can also use options as follows (in the format "ib -a" for each option, respectively):
+
+	-a  search by author only
+	-t  search by title only
+	-g  search by genre only
+	-h  get available options for using this workflow
+
+	By default, if a title doesn't have a genre, Alfred Books won't be able to search for it.
+
+	While searching, you can press ⌘L to see some metadata about the selected title; this includes:
+	Title and author, genre, percentage read, description
+
+	While searching, pressing ⇧ (shift) on a selected title will attempt to show a cover and the actual filename.
+	
+	While searching, pressing your action button (one of the following: → (right arrow), fn, ctrl, ⇥ (tab)) will allow you to act directly on the Books file. Be cautious here, as modifying the file from this interface may cause inconsistencies with the Books sqlite database, causing you to need to modify the actual sqlite database if you say modify or delete a file here.
+
+	This software (currently) only searches for downloaded books by confirming an accessible path to said file in the Books sqlite database. If they're on iCloud and not downloaded, they won't show up in Alfred Books!
+
+	If you have any issues whatsoever using this software, or if you have recommendations for features, please visit:
+	https://github.com/codycodes/alfred-books/issues
+
+	LICENSE:
+Copyright © 2019 Cody Antonio Gagnon
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
 	<key>uidata</key>
 	<dict>
 		<key>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</key>
@@ -118,6 +146,8 @@
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://cody.codes</string>
 </dict>
