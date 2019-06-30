@@ -3,7 +3,6 @@ _Use Alfred as an interface to access Apple's Books application_
 
 ## "Screenshots"
 
-
 👩‍💻 Search title, author, or both at the same time 👨‍💻
 
 ![title or author or both](./media/author_title.gif)
@@ -21,6 +20,7 @@ _Use Alfred as an interface to access Apple's Books application_
 
 ## Installation
 Go to the [releases](https://github.com/codycodes/alfred-books/releases) page, download the latest version, double click to import it into Alfred (note: powerpack is required for all third party workflows, including this one!)
+
 ## Usage & General Info
 	
 You can search for title and author using the keyword search (default is `ib`).
@@ -47,3 +47,6 @@ This software (currently) only searches for downloaded books by confirming an ac
 
 If you have any issues whatsoever using this software, or if you have recommendations for features, please visit:
 https://github.com/codycodes/alfred-books/issues
+
+## Compatibility
+This workflow currently works for version >= Alfred 3; in the future, releases will be Alfred 4 only.
