@@ -105,3 +105,4 @@ venv.bak/
 alfred-books.code-workspace
 testbook.py
 test.py
+*.alfred4.*

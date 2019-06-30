@@ -8,11 +8,11 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
-		<key>4296E71F-6232-44EB-AC78-780D320DB911</key>
+		<key>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A1E23EA1-0B75-47A6-9EBD-4897177B22B5</string>
+				<string>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -25,7 +25,7 @@
 	<key>createdby</key>
 	<string>Cody Antonio Gagnon</string>
 	<key>description</key>
-	<string>Interface to access Apple's Books application</string>
+	<string>Use Alfred as an interface to access Apple's Books application</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -43,7 +43,7 @@
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>A1E23EA1-0B75-47A6-9EBD-4897177B22B5</string>
+			<string>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -54,8 +54,6 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -92,28 +90,28 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>4296E71F-6232-44EB-AC78-780D320DB911</string>
+			<string>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>4296E71F-6232-44EB-AC78-780D320DB911</key>
+		<key>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>105</integer>
+			<integer>90</integer>
 			<key>ypos</key>
-			<integer>105</integer>
+			<integer>50</integer>
 		</dict>
-		<key>A1E23EA1-0B75-47A6-9EBD-4897177B22B5</key>
+		<key>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</key>
 		<dict>
 			<key>xpos</key>
-			<integer>380</integer>
+			<integer>420</integer>
 			<key>ypos</key>
-			<integer>105</integer>
+			<integer>50</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>
