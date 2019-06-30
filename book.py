@@ -3,6 +3,7 @@ import os
 
 BOOKS_PATH = '/Library/Containers/com.apple.iBooksX/Data/Documents/BKLibrary/'
 
+
 class Book:
     'A book containing fields present in Apple\'s Books app'
 

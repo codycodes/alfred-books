@@ -4,7 +4,6 @@ from workflow import Workflow, ICON_WARNING, MATCH_ALL, MATCH_ALLCHARS
 import logging
 # import testbook as book
 
-__version__ = '0.1'
 log = None
 
 
