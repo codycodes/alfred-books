@@ -54,6 +54,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -92,7 +94,7 @@
 			<key>uid</key>
 			<string>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -114,6 +116,10 @@
 			<integer>50</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.0.1</string>
 	<key>webaddress</key>
 	<string>https://cody.codes</string>
 </dict>
