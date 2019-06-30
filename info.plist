@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.codycodes.alfredbooks</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cody Antonio Gagnon</string>
+	<key>description</key>
+	<string>Use Alfred as an interface to access Apple's Books application</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Alfred Books</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/Applications/Books.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>ib</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching books</string>
+				<key>script</key>
+				<string>python alfred_books.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>-t search via title, -a search via author, -g search via genre, -h show switches</string>
+				<key>title</key>
+				<string>Show your titles in Books</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Use Alfred as an interface to access Apple's Books application
+	
+	You can search for title and author using the keyword search (default is "ib").
+	You can also use options as follows (in the format "ib -a" for each option, respectively):
+
+	-a  search by author only
+	-t  search by title only
+	-g  search by genre only
+	-h  get available options for using this workflow
+
+	By default, if a title doesn't have a genre, Alfred Books won't be able to search for it.
+
+	While searching, you can press ⌘L to see some metadata about the selected title; this includes:
+	Title and author, genre, percentage read, description
+
+	While searching, pressing ⇧ (shift) on a selected title will attempt to show a cover and the actual filename.
+	
+	While searching, pressing your action button (one of the following: → (right arrow), fn, ctrl, ⇥ (tab)) will allow you to act directly on the Books file. Be cautious here, as modifying the file from this interface may cause inconsistencies with the Books sqlite database, causing you to need to modify the actual sqlite database if you say modify or delete a file here.
+
+	This software (currently) only searches for downloaded books by confirming an accessible path to said file in the Books sqlite database. If they're on iCloud and not downloaded, they won't show up in Alfred Books!
+
+	If you have any issues whatsoever using this software, or if you have recommendations for features, please visit:
+	https://github.com/codycodes/alfred-books/issues
+
+	LICENSE:
+Copyright © 2019 Cody Antonio Gagnon
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+	<key>uidata</key>
+	<dict>
+		<key>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+		<key>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</key>
+		<dict>
+			<key>xpos</key>
+			<integer>420</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string></string>
+	<key>webaddress</key>
+	<string>https://cody.codes</string>
+</dict>
+</plist>
