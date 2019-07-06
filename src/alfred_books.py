@@ -25,7 +25,7 @@ def main(wf):
     if args and wf.args[0]:
         switch = wf.args[0].split()[0]
         # log.debug('SWITCH: ' + switch)
-        switches = [u'-a', u'-t', u'-g', u'-h']
+        switches = [u'-a', u'-t', u'-g', u'-h', u'-n']
         if any([switch in switches]):
             switch = switch[:2]
             log.debug('SWITCH: ' + switch)
@@ -85,8 +85,17 @@ def main(wf):
                     largetext='-t   search via title,\n' +
                     '-a  search via author,\n' +
                     '-g  search via genre,\n' +
+                    '-n "True/False" filters to show new books or not,\n'
                     '-h  show switches (this one),\n' +
                     'no option(s)  search by title and author'
+                )
+            elif option == '-n':
+                log.debug('-n input')
+                books = wf.filter(
+                    query,
+                    books,
+                    key=lambda book: u' '.join(book.is_new),
+                    match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
         else:
             books = wf.filter(
@@ -109,6 +118,7 @@ def main(wf):
                     icontype='fileicon',
                     quicklookurl=b.path,
                     largetext=b.title + u', by ' + b.author +
+                    u'\nIs new: ' + b.is_new +
                     u'\nGenre: ' + b.genre +
                     u'\nCompleted: ' + b.read_pct +
                     u'\nDescription:\n' + b.book_desc)

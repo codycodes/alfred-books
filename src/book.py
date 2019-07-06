@@ -16,7 +16,7 @@ class Book:
         self.author = author
         self.book_desc = book_desc if book_desc \
             else "No book description for this title available in Books"
-        self.is_new = is_new
+        self.is_new = "True" if is_new else "False"
         self.genre = genre if genre else ''
         self.read_pct = '0%' if not read_pct else str(read_pct * 100)[:4] + '%'
         Book.books += 1
