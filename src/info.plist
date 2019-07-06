@@ -45,7 +45,7 @@
 			<key>uid</key>
 			<string>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -94,7 +94,7 @@
 			<key>uid</key>
 			<string>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
