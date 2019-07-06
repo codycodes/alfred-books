@@ -47,7 +47,6 @@ def main(wf):
         return 0
 
     log.debug('QUERY: ' + str(query) + ', OPTION: ' + str(option))
-    # TODO: play around with the text matching.
 
     # show help with no space required
     if query or option == '-h':
