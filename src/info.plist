@@ -45,7 +45,7 @@
 			<key>uid</key>
 			<string>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -54,8 +54,6 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -144,10 +142,8 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 			<integer>50</integer>
 		</dict>
 	</dict>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string></string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://cody.codes</string>
 </dict>
