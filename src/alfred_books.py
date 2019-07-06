@@ -111,7 +111,7 @@ def main(wf):
                     quicklookurl=b.path,
                     largetext=b.title + u', by ' + b.author +
                     u'\nGenre: ' + b.genre +
-                    u'\nCompleted: ' + b.percent_complete +
+                    u'\nCompleted: ' + b.read_pct +
                     u'\nDescription:\n' + b.book_desc)
     wf.send_feedback()
 
