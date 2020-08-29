@@ -107,12 +107,12 @@ def main(wf):
             )
 
     for b in books:
-        if b.genre == '':
-            b.genre = 'No genre for this title available in Books'
         wf.add_item(type='file',
                     title=b.title,
                     valid=True,
-                    subtitle=b.author,
+                    subtitle=b.author if b.path is not None else
+                    'Please download file in books app first'
+                    ' to open in Alfred Books',
                     arg=b.path,
                     icon=b.path,
                     icontype='fileicon',
