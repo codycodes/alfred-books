@@ -17,7 +17,7 @@ class Book:
         self.book_desc = book_desc if book_desc \
             else "No book description for this title available in Books"
         self.is_new = "True" if is_new else "False"
-        self.genre = genre if genre else ''
+        self.genre = genre if genre else 'No genre for this title available in Books'
         self.read_pct = '0%' if not read_pct else str(read_pct * 100)[:4] + '%'
         Book.books += 1
 
@@ -45,14 +45,25 @@ def get_book_db():
 
 def get_books():
     conn = sqlite3.connect(get_book_db())
+    conn.row_factory = sqlite3.Row
     c = conn.cursor()
     c.execute('''SELECT "_rowid_",* FROM "main"."ZBKLIBRARYASSET" ORDER BY "_rowid_" ASC LIMIT 0, 49999;''')
     data = c.fetchall()
     books = []
-    for b in data:
+    for row in data:
+        row = dict(row)
         # check if path exists
-        if (b[72]):
-            books.append(Book(b[78], b[72], b[56], b[57], b[18], b[66], b[50]))
+        if row['ZPATH'] is not None:
+            book = Book(
+                title=row['ZTITLE'],
+                path=row['ZPATH'] if os.path.exists(row['ZPATH']) else None,
+                author=row['ZAUTHOR'],
+                book_desc=row['ZBOOKDESCRIPTION'],
+                is_new=row['ZISNEW'],
+                genre=row['ZGENRE'],
+                read_pct=row['ZREADINGPROGRESS'],
+            )
+            books.append(book)
     conn.close()
     return books
 
