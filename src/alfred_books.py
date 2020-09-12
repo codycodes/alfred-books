@@ -25,7 +25,6 @@ def main(wf):
     option = None
     if args and wf.args[0]:
         switch = wf.args[0].split()[0]
-        # log.debug('SWITCH: ' + switch)
         switches = [u'-a', u'-t', u'-g', u'-h', u'-n']
         if any([switch in switches]):
             switch = switch[:2]
@@ -36,10 +35,7 @@ def main(wf):
         query = wf.decode(query)
     else:
         query = None
-    # max age of 20 seconds to reduce querying database
-    # and make it blazingly fast
     books = wf.cached_data('books', book.get_books, max_age=20)
-    # books = book.get_books()
 
     # Don't do anything else if there are no books
     if not books:
@@ -47,8 +43,6 @@ def main(wf):
                     icon=ICON_WARNING)
         wf.send_feedback()
         return 0
-
-    log.debug('QUERY: ' + query + ', OPTION: ' + str(option))
 
     # show help with no space required
     if query or option == '-h':
