@@ -1,3 +1,4 @@
+# encoding: utf-8
 import sys
 import book
 from workflow import Workflow, ICON_WARNING, ICON_INFO, MATCH_ALL, \
@@ -24,7 +25,6 @@ def main(wf):
     option = None
     if args and wf.args[0]:
         switch = wf.args[0].split()[0]
-        # log.debug('SWITCH: ' + switch)
         switches = [u'-a', u'-t', u'-g', u'-h', u'-n']
         if any([switch in switches]):
             switch = switch[:2]
@@ -32,12 +32,10 @@ def main(wf):
             query, option = wf.args[0].split(switch)[1], switch
         else:
             query, option = wf.args[0], None
+        query = wf.decode(query)
     else:
         query = None
-    # max age of 20 seconds to reduce querying database
-    # and make it blazingly fast
     books = wf.cached_data('books', book.get_books, max_age=20)
-    # books = book.get_books()
 
     # Don't do anything else if there are no books
     if not books:
@@ -45,8 +43,6 @@ def main(wf):
                     icon=ICON_WARNING)
         wf.send_feedback()
         return 0
-
-    log.debug('QUERY: ' + str(query) + ', OPTION: ' + str(option))
 
     # show help with no space required
     if query or option == '-h':
@@ -56,7 +52,7 @@ def main(wf):
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: u' '.join(book.author),
+                    key=lambda book: ' '.join(book.author),
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
             elif option == '-t':
@@ -64,7 +60,7 @@ def main(wf):
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: u' '.join(book.title),
+                    key=lambda book: ' '.join(book.title),
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
             elif option == '-g':
@@ -72,7 +68,7 @@ def main(wf):
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: u' '.join(book.genre),
+                    key=lambda book: ' '.join(book.genre),
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
             elif option == '-h':
@@ -94,15 +90,15 @@ def main(wf):
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: u' '.join(book.is_new),
+                    key=lambda book: ' '.join(book.is_new),
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
         else:
             books = wf.filter(
                 query,
                 books,
-                key=lambda book: u' '.join(book.title) + u' ' +
-                u' '.join(book.author),
+                key=lambda book: ' '.join(book.title) + ' ' +
+                ' '.join(book.author),
                 match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
             )
 
@@ -117,16 +113,17 @@ def main(wf):
                     icon=b.path,
                     icontype='fileicon',
                     quicklookurl=b.path,
-                    largetext=b.title + u', by ' + b.author +
-                    u'\nIs new: ' + b.is_new +
-                    u'\nGenre: ' + b.genre +
-                    u'\nCompleted: ' + b.read_pct +
-                    u'\nDescription:\n' + b.book_desc)
+                    largetext=b.title + ', by ' + b.author +
+                    '\nIs new: ' + b.is_new +
+                    '\nGenre: ' + b.genre +
+                    '\nCompleted: ' + b.read_pct +
+                    '\nDescription:\n' + b.book_desc)
     wf.send_feedback()
 
 
 if __name__ == u"__main__":
     wf = Workflow(help_url='https://github.com/codycodes/alfred-books/issues',
-                  update_settings={'github_slug': 'codycodes/alfred-books'})
+                  update_settings={'github_slug': 'codycodes/alfred-books'},
+                  normalization='NFD')
     log = wf.logger
     sys.exit(wf.run(main))

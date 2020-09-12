@@ -1,7 +1,9 @@
 import sqlite3
 import os
 
-BOOKS_PATH = '/Library/Containers/com.apple.iBooksX/Data/Documents/BKLibrary/'
+BOOKS_PATH = os.path.expanduser('~'
+                                '/Library/Containers/'
+                                'com.apple.iBooksX/Data/Documents/BKLibrary/')
 
 
 class Book:
@@ -35,11 +37,10 @@ class Book:
 
 
 def get_book_db():
-    book_dir = os.path.expanduser('~' + BOOKS_PATH)
     dbs = []
-    dbs += [each for each in os.listdir(book_dir)
+    dbs += [each for each in os.listdir(BOOKS_PATH)
             if (each.endswith('.sqlite') and each.startswith('BKLibrary'))]
-    db_path = book_dir + dbs[0]
+    db_path = BOOKS_PATH + dbs[0]
     return db_path
 
 
