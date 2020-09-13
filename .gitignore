@@ -107,3 +107,7 @@ testbook.py
 test.py
 *alfred4*
 .DS_Store
+
+# custom
+alfred_books.py
+book.py
