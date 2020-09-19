@@ -1,4 +1,6 @@
 # encoding: utf-8
+from __future__ import unicode_literals
+
 import sys
 import book
 from workflow import Workflow, ICON_WARNING, ICON_INFO, MATCH_ALL, \
@@ -9,8 +11,6 @@ log = None
 
 def main(wf):
 
-    log.debug('Started')
-
     if wf.update_available:
         # Adds a notification to top of Script Filter results
         wf.add_item('New version available',
@@ -20,7 +20,6 @@ def main(wf):
                     icon=ICON_INFO)
 
     args = len(wf.args)
-    log.debug('ARGS: ' + str(wf.args))
 
     option = None
     if args and wf.args[0]:
@@ -28,14 +27,13 @@ def main(wf):
         switches = [u'-a', u'-t', u'-g', u'-h', u'-n']
         if any([switch in switches]):
             switch = switch[:2]
-            log.debug('SWITCH: ' + switch)
             query, option = wf.args[0].split(switch)[1], switch
         else:
             query, option = wf.args[0], None
-        query = wf.decode(query)
+
     else:
         query = None
-    books = wf.cached_data('books', book.get_books, max_age=20)
+    books = wf.cached_data('books', book.get_books, max_age=5)
 
     # Don't do anything else if there are no books
     if not books:
@@ -48,27 +46,24 @@ def main(wf):
     if query or option == '-h':
         if option:
             if option == '-a':
-                log.debug('-a input')
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: ' '.join(book.author),
+                    key=lambda book: book.author,
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
             elif option == '-t':
-                log.debug('-t input')
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: ' '.join(book.title),
+                    key=lambda book: book.title,
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
             elif option == '-g':
-                log.debug('-g input')
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: ' '.join(book.genre),
+                    key=lambda book: book.genre,
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
             elif option == '-h':
@@ -86,22 +81,21 @@ def main(wf):
                     'no option(s)  search by title and author'
                 )
             elif option == '-n':
-                log.debug('-n input')
                 books = wf.filter(
                     query,
                     books,
-                    key=lambda book: ' '.join(book.is_new),
+                    key=lambda book: book.is_new,
                     match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
                 )
         else:
             books = wf.filter(
                 query,
                 books,
-                key=lambda book: ' '.join(book.title) + ' ' +
-                ' '.join(book.author),
+                key=lambda book: book.title + book.author,
                 match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
             )
 
+    books.sort(key=lambda book: book.last_accessed, reverse=True)
     for b in books:
         wf.add_item(type='file',
                     title=b.title,
@@ -121,9 +115,8 @@ def main(wf):
     wf.send_feedback()
 
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     wf = Workflow(help_url='https://github.com/codycodes/alfred-books/issues',
-                  update_settings={'github_slug': 'codycodes/alfred-books'},
-                  normalization='NFD')
+                  update_settings={'github_slug': 'codycodes/alfred-books'})
     log = wf.logger
     sys.exit(wf.run(main))
