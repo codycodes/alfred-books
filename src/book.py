@@ -3,9 +3,8 @@ from __future__ import unicode_literals
 import sqlite3
 import os
 
-BOOKS_PATH = os.path.expanduser('~'
-                                '/Library/Containers/'
-                                'com.apple.iBooksX/Data/Documents/BKLibrary/')
+BOOKS_PATH = os.path.expanduser(
+    '~/Library/Containers/com.apple.iBooksX/Data/Documents/BKLibrary/')
 
 
 class Book:
@@ -14,7 +13,7 @@ class Book:
     books = 0
 
     def __init__(self, title, path, author, book_desc, is_new, genre,
-                 read_pct):
+                 read_pct, last_accessed):
         self.title = title
         self.path = path
         self.author = author
@@ -23,6 +22,7 @@ class Book:
         self.is_new = "True" if is_new else "False"
         self.genre = genre if genre else 'No genre for this title available in Books'
         self.read_pct = '0%' if not read_pct else str(read_pct * 100)[:4] + '%'
+        self.last_accessed = last_accessed
         Book.books += 1
 
     def display_book(self):
@@ -57,6 +57,17 @@ def get_books():
         row = dict(row)
         # check if path exists
         if row['ZPATH'] is not None:
+            if os.path.exists(row['ZPATH']):
+                try:
+                    # grab last metadata change
+                    last_accessed = float(os.stat(row['ZPATH']).st_ctime)
+                except OSError:
+                    # inaccessible path
+                    last_accessed = -1
+            else:
+                # book not downloaded
+                last_accessed = -1
+
             book = Book(
                 title=row['ZTITLE'],
                 path=row['ZPATH'] if os.path.exists(row['ZPATH']) else None,
@@ -65,6 +76,7 @@ def get_books():
                 is_new=row['ZISNEW'],
                 genre=row['ZGENRE'],
                 read_pct=row['ZREADINGPROGRESS'],
+                last_accessed=last_accessed,
             )
             books.append(book)
     conn.close()

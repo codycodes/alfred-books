@@ -33,7 +33,7 @@ def main(wf):
 
     else:
         query = None
-    books = wf.cached_data('books', book.get_books, max_age=20)
+    books = wf.cached_data('books', book.get_books, max_age=5)
 
     # Don't do anything else if there are no books
     if not books:
@@ -95,6 +95,7 @@ def main(wf):
                 match_on=MATCH_ALL ^ MATCH_ALLCHARS, min_score=30
             )
 
+    books.sort(key=lambda book: book.last_accessed, reverse=True)
     for b in books:
         wf.add_item(type='file',
                     title=b.title,
