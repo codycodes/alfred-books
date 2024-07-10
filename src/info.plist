@@ -36,7 +36,7 @@
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string>/Applications/Books.app</string>
+				<string>/System/Applications/Books.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
@@ -54,6 +54,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -61,7 +63,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>ib</string>
+				<string>{var:MAIN_KEYWORD}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -73,7 +75,7 @@
 				<key>runningsubtext</key>
 				<string>Fetching books</string>
 				<key>script</key>
-				<string>python alfred_books.py "{query}"</string>
+				<string>/usr/bin/python3 alfred_books.py "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -92,35 +94,38 @@
 			<key>uid</key>
 			<string>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Use Alfred as an interface to access Apple's Books application
-	
-	You can search for title and author using the keyword search (default is "ib").
-	You can also use options as follows (in the format "ib -a" for each option, respectively):
+	<string># Alfred Books 📖
+**Use Alfred as an interface to access Apple's Books application**
 
-	-a  search by author only
-	-t  search by title only
-	-g  search by genre only
-	-h  get available options for using this workflow
+Original by Cody Antonio Gagnon ([@codycodes](https://github.com/codycodes)), migrated to Alfred 5 and Python3 by [@giovannicoppola](https://github.com/giovannicoppola)
 
-	By default, if a title doesn't have a genre, Alfred Books won't be able to search for it.
+You can search for title and author using the keyword search (default is `ib`).
+You can also use options as follows (in the format `ib -a` for each option, respectively):
 
-	While searching, you can press ⌘L to see some metadata about the selected title; this includes:
-	Title and author, genre, percentage read, description
+- `-a`  search by author only
+- `-t`  search by title only
+- `-g`  search by genre only
+- `-h`  get available options for using this workflow
 
-	While searching, pressing ⇧ (shift) on a selected title will attempt to show a cover and the actual filename.
-	
-	While searching, pressing your action button (one of the following: → (right arrow), fn, ctrl, ⇥ (tab)) will allow you to act directly on the Books file. Be cautious here, as modifying the file from this interface may cause inconsistencies with the Books sqlite database, causing you to need to modify the actual sqlite database if you say modify or delete a file here.
+By default, if a title doesn't have a genre, Alfred Books won't be able to search for it.
 
-	This software (currently) only searches for downloaded books by confirming an accessible path to said file in the Books sqlite database. If they're on iCloud and not downloaded, they won't show up in Alfred Books!
+While searching, you can press `⌘L` to see some metadata about the selected title; this includes:
+Title and author, genre, percentage read, description.
 
-	If you have any issues whatsoever using this software, or if you have recommendations for features, please visit:
-	https://github.com/codycodes/alfred-books/issues
+While searching, pressing `⇧` (shift) on a selected title will attempt to show a cover and the actual filename.
 
-	LICENSE:
+While searching, pressing your action button (one of the following: `→` (right arrow), `fn`, `ctrl`, `⇥` (tab)) will allow you to act directly on the Books file. Be cautious here, as modifying the file from this interface may cause inconsistencies with the Books sqlite database, causing you to need to modify the actual sqlite database if you say modify or delete a file here.
+
+This software (currently) only searches for downloaded books by confirming an accessible path to said file in the Books sqlite database. If they're on iCloud and not downloaded, they won't show up in Alfred Books!
+
+If you have any issues whatsoever using this software, or if you have recommendations for features, please visit:
+https://github.com/giovannicoppola/alfred-books/issues
+
+### LICENSE:
 Copyright © 2019 Cody Antonio Gagnon
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -130,20 +135,46 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 		<key>D7815980-A759-4BB5-A2EF-4DA41EC20ECC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>90</integer>
+			<real>380</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>230</real>
 		</dict>
 		<key>ED5AE8BA-3824-4A52-8E18-EFBD39F27237</key>
 		<dict>
 			<key>xpos</key>
-			<integer>420</integer>
+			<real>710</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>230</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ib</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Main Keyword:</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MAIN_KEYWORD</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>2.0</string>
 	<key>webaddress</key>
 	<string>https://cody.codes</string>
 </dict>
